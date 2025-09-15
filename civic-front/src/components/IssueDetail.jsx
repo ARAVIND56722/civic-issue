@@ -3,13 +3,31 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api";
 import socket from "../socket";
-import { Container, Badge, Spinner, Card } from "react-bootstrap";
 
-const statusVariant = {
-  submitted: "secondary",
-  acknowledged: "info",
-  "in-progress": "warning",
-  resolved: "success",
+function formatDate(iso) {
+  try {
+    return new Date(iso).toLocaleString();
+  } catch {
+    return iso;
+  }
+}
+
+const styles = {
+  container: { maxWidth: 900, margin: "0 auto", padding: 16 },
+  header: { display: "flex", alignItems: "center", justifyContent: "space-between" },
+  badge: { padding: "6px 10px", borderRadius: 6, color: "white", fontWeight: 600 },
+  timeline: { marginTop: 20, borderLeft: "2px solid #eee", paddingLeft: 18 },
+  item: { position: "relative", marginBottom: 18, paddingLeft: 10 },
+  dot: { position: "absolute", left: -11, top: 4, width: 14, height: 14, borderRadius: 8, border: "3px solid white" },
+  note: { marginTop: 6, color: "#444" },
+  small: { color: "#666", fontSize: 13 }
+};
+
+const statusColor = {
+  submitted: "#6c757d",
+  acknowledged: "#0d6efd",
+  "in-progress": "#f0ad4e",
+  resolved: "#28a745",
 };
 
 export default function IssueDetail() {
@@ -30,16 +48,25 @@ export default function IssueDetail() {
     }
   }, [id]);
 
+  // initial load
   useEffect(() => {
     fetchIssue();
   }, [fetchIssue]);
 
+  // Listen for socket events and refresh when current issue is updated/assigned
   useEffect(() => {
     const onStatus = (data) => {
-      if (String(data.issueId) === String(id)) fetchIssue();
+      if (!data) return;
+      if (String(data.issueId) === String(id)) {
+        fetchIssue();
+      }
     };
+
     const onAssign = (data) => {
-      if (String(data.issueId) === String(id)) fetchIssue();
+      if (!data) return;
+      if (String(data.issueId) === String(id)) {
+        fetchIssue();
+      }
     };
 
     socket.on("issueStatusUpdated", onStatus);
@@ -51,46 +78,83 @@ export default function IssueDetail() {
     };
   }, [id, fetchIssue]);
 
-  if (loading && !issue) return <div className="text-center mt-4"><Spinner animation="border" /></div>;
-  if (!issue) return <Container className="mt-4">No issue found.</Container>;
+  if (loading && !issue) return <div style={{ padding: 16 }}>Loading...</div>;
+  if (!issue) return <div style={{ padding: 16 }}>No issue found.</div>;
 
-  const history = (issue.statusHistory || []).slice().sort((a, b) => new Date(a.changedAt) - new Date(b.changedAt));
+  // sort history by changedAt ascending (old -> new)
+  const history = (issue.statusHistory || []).slice().sort((a, b) => new Date(a.changedAt || a._id) - new Date(b.changedAt || b._id));
 
   return (
-    <Container className="mt-4">
-      <Card className="p-4 shadow-sm">
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <h3>{issue.title}</h3>
-            <p className="mb-1"><strong>Category:</strong> {issue.category || "—"}</p>
-            <p className="mb-1"><strong>Location:</strong> {issue.location || "—"}</p>
-          </div>
-          <div>
-            <Badge bg={statusVariant[issue.status] || "dark"}>{issue.status}</Badge>
-            <div className="text-muted small mt-1">Updated: {new Date(issue.updatedAt).toLocaleString()}</div>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <div>
+          <h2 style={{ margin: 0 }}>{issue.title}</h2>
+          <div style={{ marginTop: 6 }}>
+            <span style={{ marginRight: 12 }} className="small">
+              <strong>Category:</strong> {issue.category || "—"}
+            </span>
+            <span style={styles.small}><strong>Location:</strong> {issue.location || "—"}</span>
           </div>
         </div>
 
-        {issue.photoUrl && <Card.Img src={issue.photoUrl} alt="issue" className="my-3 rounded" />}
+        <div style={{ textAlign: "right" }}>
+          <div
+            style={{
+              ...styles.badge,
+              background: statusColor[issue.status] || "#777",
+            }}
+          >
+            {issue.status.toUpperCase()}
+          </div>
+          <div style={{ marginTop: 6, fontSize: 13, color: "#666" }}>
+            Updated: {formatDate(issue.updatedAt)}
+          </div>
+        </div>
+      </div>
 
-        <h5>Description</h5>
-        <p>{issue.description || "—"}</p>
+      {issue.photoUrl && (
+        <div style={{ marginTop: 16 }}>
+          <img src={issue.photoUrl} alt="issue" style={{ maxWidth: "100%", borderRadius: 6 }} />
+        </div>
+      )}
 
-        <h5>Status Timeline</h5>
-        <ul className="list-group mb-3">
-          {history.map((h, idx) => (
-            <li key={idx} className="list-group-item">
-              <Badge bg={statusVariant[h.status] || "dark"} className="me-2">{h.status}</Badge>
-              {h.note} <br />
-              <small className="text-muted">{new Date(h.changedAt).toLocaleString()}</small>
-            </li>
-          ))}
-        </ul>
+      <div style={{ marginTop: 18 }}>
+        <h3 style={{ marginBottom: 6 }}>Description</h3>
+        <p style={{ marginTop: 0 }}>{issue.description || "—"}</p>
+      </div>
 
-        <h5>Assignment</h5>
-        <p><strong>Department:</strong> {issue.assignedDepartment || "Unassigned"}</p>
-      </Card>
-    </Container>
+      <div style={{ marginTop: 18 }}>
+        <h3>Status timeline</h3>
+        <div style={styles.timeline}>
+          {history.length === 0 && (
+            <div style={styles.item}>
+              <div style={{ ...styles.dot, background: "#ccc" }} />
+              <div>No status updates yet.</div>
+            </div>
+          )}
+
+          {history.map((h, idx) => {
+            const color = statusColor[h.status] || "#666";
+            return (
+              <div key={idx} style={styles.item}>
+                <div style={{ ...styles.dot, background: color }} />
+                <div>
+                  <strong style={{ textTransform: "capitalize" }}>{h.status}</strong>{" "}
+                  <span style={{ marginLeft: 8, color: "#666", fontSize: 13 }}>{formatDate(h.changedAt)}</span>
+                  <div style={styles.note}>{h.note || ""}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{ marginTop: 22 }}>
+        <h3>Assignment</h3>
+        <div>
+          <strong>Department:</strong> {issue.assignedDepartment || "Unassigned"}
+        </div>
+      </div>
+    </div>
   );
-  
 }

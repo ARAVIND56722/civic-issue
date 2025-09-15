@@ -13,6 +13,19 @@ const upload = multer({ storage });
 
 const { autoAssign } = require("../utils/department");
 
+router.get("/:id", async (req, res) => {
+  try {
+    const issue = await Issue.findById(req.params.id);
+    if (!issue) {
+      return res.status(404).json({ error: "Issue not found" });
+    }
+    res.json(issue);
+  } catch (err) {
+    console.error("Error fetching issue:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // --- CREATE issue ---
 router.post("/", auth, upload.single("photo"), async (req, res) => {
   console.log("🟢 Full req.body:", req.body);
