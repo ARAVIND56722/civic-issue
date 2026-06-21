@@ -68,57 +68,86 @@ Submitted → Acknowledged → In Progress → Resolved
 - Real-Time Complaint Updates
 
   ---
+## 🏗️ System Architecture
 
-  🏗️ System Architecture
-┌────────────────────────────┐
-│         Citizens           │
-└─────────────┬──────────────┘
-              │
-              ▼
-┌────────────────────────────┐
-│      Frontend Layer        │
-│      Web Application       │
-└─────────────┬──────────────┘
-              │
-              ▼
-┌────────────────────────────┐
-│      Backend Services      │
-│ Authentication & Business  │
-│         Logic Layer        │
-└─────────────┬──────────────┘
-              │
-              ▼
-┌────────────────────────────┐
-│        Database Layer      │
-│ Users, Complaints, Status  │
-└─────────────┬──────────────┘
-              │
-              ▼
-┌────────────────────────────┐
-│ Municipal Authorities/Admin│
-└────────────────────────────┘
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                        CLIENT LAYER                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Citizens                     Municipal Authorities/Admins  │
+│     │                                      │                │
+│     └───────────────┬──────────────────────┘                │
+│                     │                                       │
+└─────────────────────▼───────────────────────────────────────┘
 
----
+┌─────────────────────────────────────────────────────────────┐
+│                    PRESENTATION LAYER                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│          React.js Frontend Application                      │
+│                                                             │
+│  • User Authentication                                      │
+│  • Issue Reporting Interface                               │
+│  • Complaint Tracking Dashboard                            │
+│  • Admin Management Dashboard                              │
+│  • Map-Based Issue Visualization                           │
+│  • Notification Center                                     │
+│                                                             │
+└─────────────────────┬───────────────────────────────────────┘
+                      │ REST API Requests
+                      ▼
 
-## 🔄 Complaint Lifecycle
-Issue Reported
-       │
-       ▼
-Under Review
-       │
-       ▼
-Assigned to Department
-       │
-       ▼
-Work In Progress
-       │
-       ▼
-Resolved
-       │
-       ▼
-Closed
+┌─────────────────────────────────────────────────────────────┐
+│                    APPLICATION LAYER                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                Node.js + Express.js API                     │
+│                                                             │
+│  • Authentication & Authorization                           │
+│  • Complaint Management Service                             │
+│  • Department Assignment Service                            │
+│  • Status Tracking Service                                  │
+│  • Notification Service                                     │
+│  • File Upload Management                                   │
+│  • Geo-Location Processing                                  │
+│                                                             │
+└──────────────┬──────────────────────┬───────────────────────┘
+               │                      │
+               │                      │
+               ▼                      ▼
 
-  # 🏗️ Technology Stack
+┌──────────────────────┐    ┌───────────────────────────────┐
+│   CLOUDINARY STORAGE │    │       MONGODB DATABASE        │
+├──────────────────────┤    ├───────────────────────────────┤
+│                      │    │                               │
+│ • Issue Images       │    │ • Users Collection           │
+│ • Evidence Photos    │    │ • Issues Collection          │
+│ • Media Management   │    │ • Notifications Collection   │
+│                      │    │ • Status History Collection  │
+│                      │    │ • Department Records         │
+│                      │    │                               │
+└──────────────────────┘    └───────────────────────────────┘
+
+                      ▲
+                      │
+                      │
+┌─────────────────────────────────────────────────────────────┐
+│                    SECURITY LAYER                           │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  • JWT Authentication                                       │
+│  • Role-Based Access Control (RBAC)                         │
+│  • Password Hashing (bcrypt)                                │
+│  • API Route Protection                                     │
+│  • Input Validation & Sanitization                          │
+│  • Secure Environment Variables                             │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+  
+
+## 🏗️ Technology Stack
 
 ## Frontend
 
