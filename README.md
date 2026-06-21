@@ -1,5 +1,6 @@
 ## 🏙️ CivicConnect – Smart Civic Issue Reporting & Tracking System
 
+
 ## 📌 Project Overview
 
 CivicConnect is a citizen-centric civic issue reporting and tracking platform designed to bridge the communication gap between citizens and municipal authorities. The system enables residents to report public infrastructure and community-related issues such as potholes, garbage accumulation, water leakage, drainage problems, damaged streetlights, and other civic concerns.
@@ -7,6 +8,10 @@ CivicConnect is a citizen-centric civic issue reporting and tracking platform de
 The platform provides real-time issue tracking, image-based evidence submission, status monitoring, and centralized complaint management, ensuring greater transparency, accountability, and efficiency in public service operations.
 
 By digitizing the complaint lifecycle, CivicConnect empowers citizens while helping authorities prioritize, monitor, and resolve issues more effectively.
+
+
+## Loom video : [https://www.loom.com/share/0f0ca8f0e9d8430b8cdbf200dafa9e0e]
+
 
 ## 🎯 Problem Statement
 
@@ -187,49 +192,6 @@ Submitted → Acknowledged → In Progress → Resolved
 - GitHub
 - Postman
 - VS Code
-
-  # 🗄️ Database Schema
-
-## User Collection
-
-| Field | Type |
-|---------|--------|
-| _id | ObjectId |
-| name | String |
-| email | String |
-| password | String |
-| role | String |
-| createdAt | Date |
-
----
-
-## Issue Collection
-
-| Field | Type |
-|---------|--------|
-| _id | ObjectId |
-| title | String |
-| description | String |
-| category | String |
-| imageUrl | String |
-| location | GeoJSON |
-| status | String |
-| reportedBy | ObjectId |
-| assignedDepartment | String |
-| createdAt | Date |
-| updatedAt | Date |
-
----
-
-## Notification Collection
-
-| Field | Type |
-|---------|--------|
-| _id | ObjectId |
-| userId | ObjectId |
-| message | String |
-| isRead | Boolean |
-| createdAt | Date |
 
 ---
 
