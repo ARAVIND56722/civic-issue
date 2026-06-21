@@ -10,7 +10,7 @@ The platform provides real-time issue tracking, image-based evidence submission,
 By digitizing the complaint lifecycle, CivicConnect empowers citizens while helping authorities prioritize, monitor, and resolve issues more effectively.
 
 
-## Loom video : [https://www.loom.com/share/0f0ca8f0e9d8430b8cdbf200dafa9e0e]
+## Loom video : https://www.loom.com/share/0f0ca8f0e9d8430b8cdbf200dafa9e0e
 
 
 ## 🎯 Problem Statement
