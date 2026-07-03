@@ -219,6 +219,36 @@ Submitted → Acknowledged → In Progress → Resolved
   
   ---
   
+## Screenshots
+  
+## Welcome Page
+  
+<img width="562" height="535" alt="image" src="https://github.com/user-attachments/assets/cd107bac-d106-4b06-97be-d1f0ec5008b2" />
+
+<img width="942" height="600" alt="image" src="https://github.com/user-attachments/assets/91673343-5d95-45e1-8504-093203b081cf" />
+
+## Citizen Portal
+  
+<img width="526" height="572" alt="image" src="https://github.com/user-attachments/assets/3d4a2adf-b8c5-434b-b816-b2ad6d6654dc" />
+
+<img width="1872" height="917" alt="image" src="https://github.com/user-attachments/assets/1291253d-7144-4421-88b5-2baa864088ab" />
+
+<img width="807" height="855" alt="image" src="https://github.com/user-attachments/assets/23f0470f-09f3-4179-a4d1-f2bacc39ca71" />
+
+## users all the reported issues
+
+<img width="1868" height="777" alt="image" src="https://github.com/user-attachments/assets/89dda5d2-2271-4e41-ac4b-dfeea0a0915c" />
+
+<img width="1227" height="842" alt="image" src="https://github.com/user-attachments/assets/82a615c6-1950-4005-9c32-c3b1840586e5" />
+
+ ## Admin Portal 
+
+ <img width="533" height="586" alt="image" src="https://github.com/user-attachments/assets/7b6bf31c-f05d-493a-9ccd-ec812a4ad501" />
+ 
+ <img width="1877" height="813" alt="image" src="https://github.com/user-attachments/assets/9600a565-e82d-4301-8145-3c5683d402f3" />
+
+ ---
+ 
 ## 📈 Future Enhancements
 - AI-Based Issue Categorization
 - AI-Powered Complaint Prioritization
