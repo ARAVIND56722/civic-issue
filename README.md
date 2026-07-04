@@ -9,10 +9,6 @@ The platform provides real-time issue tracking, image-based evidence submission,
 
 By digitizing the complaint lifecycle, CivicConnect empowers citizens while helping authorities prioritize, monitor, and resolve issues more effectively.
 
-
-## Loom video : https://www.loom.com/share/0f0ca8f0e9d8430b8cdbf200dafa9e0e
-
-
 ## 🎯 Problem Statement
 
 Traditional civic complaint systems often face several challenges:
@@ -157,9 +153,9 @@ Submitted → Acknowledged → In Progress → Resolved
 ## Frontend
 
 - React.js
-- Bootstrap
+- React Bootstrap
 - Axios
-- React Router
+- React Router DOM
 
 ## Backend
 
@@ -180,18 +176,6 @@ Submitted → Acknowledged → In Progress → Resolved
 
 - Multer
 - Cloudinary
-
-## Mapping & Location Services
-
-- GeoJSON
-- Interactive Map Integration
-
-## Development Tools
-
-- Git
-- GitHub
-- Postman
-- VS Code
 
 ---
 
@@ -247,6 +231,9 @@ Submitted → Acknowledged → In Progress → Resolved
  
  <img width="1877" height="813" alt="image" src="https://github.com/user-attachments/assets/9600a565-e82d-4301-8145-3c5683d402f3" />
 
+ <img width="1822" height="903" alt="image" src="https://github.com/user-attachments/assets/ff3f6c39-66a9-4e6a-88be-9178407e9949" />
+
+
  ---
  
 ## 📈 Future Enhancements
@@ -254,15 +241,10 @@ Submitted → Acknowledged → In Progress → Resolved
 - AI-Powered Complaint Prioritization
 - Smart Recommendation Engine
 - GIS & Interactive Map Integration
-- Mobile Application Support
-- SMS Notifications
 - Email Notifications
 - Real-Time Push Notifications
 - Multi-Language Support
 - Government Portal Integration
-- Smart City Infrastructure Integration
-- Analytics & Reporting Dashboard
-- Predictive Maintenance System
 
   ---
   
