@@ -216,11 +216,11 @@ export default function AdminDashboard() {
 
           {loading ? (
             <div className="text-center py-5">
-              <Spinner animation="border" variant="success" />
+              <Spinner animation="border" variant="primary" />
               <div className="mt-2 text-muted">Loading incidents...</div>
             </div>
           ) : (
-            <Table hover responsive style={{ margin: 0, background: "transparent", color: "var(--text-main)" }}>
+            <Table hover responsive className="admin-incidents-table" style={{ margin: 0, background: "transparent" }}>
               <thead style={{ background: "rgba(15, 23, 42, 0.4)" }}>
                 <tr style={{ borderColor: "rgba(255,255,255,0.08)" }}>
                   <th style={{ padding: "16px", color: "var(--text-muted)", borderBottom: "none" }}>Title</th>
@@ -233,20 +233,20 @@ export default function AdminDashboard() {
               </thead>
               <tbody>
                 {issues.map((it) => (
-                  <tr key={it._id} style={{ borderColor: "rgba(255,255,255,0.06)", verticalAlign: "middle" }}>
-                    <td style={{ padding: "16px", fontWeight: "600", color: "#fff" }}>{it.title}</td>
-                    <td style={{ padding: "16px", color: "var(--text-muted)" }}>{it.category || "—"}</td>
-                    <td style={{ padding: "16px" }}>
+                  <tr key={it._id} style={{ borderColor: "rgba(255,255,255,0.06)", verticalAlign: "middle", background: "transparent" }}>
+                    <td style={{ padding: "16px", fontWeight: "600", color: "#fff", background: "transparent" }}>{it.title}</td>
+                    <td style={{ padding: "16px", color: "var(--text-muted)", background: "transparent" }}>{it.category || "—"}</td>
+                    <td style={{ padding: "16px", background: "transparent" }}>
                       <span className={`status-badge ${statusVariant[it.status] || "status-submitted"}`}>
                         {it.status}
                       </span>
                     </td>
-                    <td style={{ padding: "16px" }}>
+                    <td style={{ padding: "16px", background: "transparent" }}>
                       <strong style={{ color: it.assignedDepartment ? "#cbd5e1" : "var(--text-muted)" }}>
                         {it.assignedDepartment || "Unassigned"}
                       </strong>
                     </td>
-                    <td style={{ padding: "16px" }}>
+                    <td style={{ padding: "16px", background: "transparent" }}>
                       {it.photoUrl ? (
                         <img
                           src={it.photoUrl}
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
                         <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "13px" }}>None</span>
                       )}
                     </td>
-                    <td style={{ padding: "16px", textAlign: "right" }}>
+                    <td style={{ padding: "16px", textAlign: "right", background: "transparent" }}>
                       <div className="d-inline-flex gap-2 justify-content-end align-items-center">
                         <Button
                           variant="outline-primary"
@@ -276,8 +276,8 @@ export default function AdminDashboard() {
 
                         {/* Assign Dropdown */}
                         <select
-                          className="modern-input"
-                          style={{ padding: "4px 8px !important", fontSize: "13px", height: "31px", minWidth: "100px" }}
+                          className="form-select form-select-sm"
+                          style={{ fontSize: "13px", height: "31px", minWidth: "120px", background: "var(--input-bg)", color: "var(--text-main)", borderColor: "var(--input-border)" }}
                           onChange={(e) => quickAssign(it._id, e.target.value)}
                           defaultValue=""
                         >
