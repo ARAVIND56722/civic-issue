@@ -1,5 +1,5 @@
 // src/services/notificationService.js
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || "https://civic-issue-h6x8.onrender.com";
 
 export async function fetchNotifications(userId) {
   const res = await fetch(`${API}/api/notifications/${userId}`);

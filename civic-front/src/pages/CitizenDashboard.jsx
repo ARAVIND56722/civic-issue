@@ -24,7 +24,7 @@ function CitizenDashboard() {
     if (!token) return;
 
     try {
-      const res = await axios.get("http://localhost:5000/api/issues/my", {
+      const res = await axios.get("https://civic-issue-h6x8.onrender.com/api/issues/my", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIssues(res.data);
@@ -69,7 +69,7 @@ function CitizenDashboard() {
         formData.append("photo", form.photo);
       }
 
-      await axios.post("http://localhost:5000/api/issues", formData, {
+      await axios.post("https://civic-issue-h6x8.onrender.com/api/issues", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -182,7 +182,7 @@ function CitizenDashboard() {
                 {issue.photo && (
                   <div>
                     <img
-                      src={`http://localhost:5000/uploads/${issue.photo}`}
+                      src={`https://civic-issue-h6x8.onrender.com/uploads/${issue.photo}`}
                       alt="issue"
                       width="150"
                       className="mt-2"
