@@ -22,6 +22,8 @@ Difficulty in prioritizing and monitoring complaints
 
 CivicConnect addresses these challenges by providing a centralized digital platform for reporting, managing, and tracking civic issues.
 
+## Live demo: https://civic-issue-iota.vercel.app/
+
 ## 🚀 Features
 
 ## 👥 Citizen Module
